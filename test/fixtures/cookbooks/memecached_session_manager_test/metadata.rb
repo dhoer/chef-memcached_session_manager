@@ -9,4 +9,3 @@ version '0.1.0'
 depends 'java', '~> 1.32'
 depends 'tomcat', '~> 0.17'
 depends 'memcached_session_manager'
-

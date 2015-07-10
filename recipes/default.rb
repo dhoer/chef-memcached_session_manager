@@ -19,7 +19,7 @@ when 'rhel', 'debian'
       version node['memcached_session_manager']['memcached']['spymemcached']
       dest node['memcached_session_manager']['tomcat']['lib']
     end
-  elsif flavor = 'couchbase'
+  elsif flavor == 'couchbase'
     maven 'couchbase-client' do
       group_id 'com.couchbase.client'
       version node['memcached_session_manager']['couchbase']['couchbase-client']
@@ -56,10 +56,8 @@ when 'rhel', 'debian'
       dest node['memcached_session_manager']['tomcat']['lib']
     end
   else
-    raise("node['memcached_session_manager']['flavor'] = '#{flavor}' is not supported!")
+    fail("node['memcached_session_manager']['flavor'] = '#{flavor}' is not supported!")
   end
 else
   Chef::Log.warn('memcached_session_manager cannot be installed on this platform using this cookbook')
 end
-
-
