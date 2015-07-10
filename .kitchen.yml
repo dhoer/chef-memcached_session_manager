@@ -20,7 +20,6 @@ suites:
       tomcat:
         base_version: 7
       memcached_session_manager:
-        flavor: couchbase
         tomcat:
           lib: /usr/share/tomcat7/lib
 
