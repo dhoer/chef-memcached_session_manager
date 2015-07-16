@@ -1,0 +1,14 @@
+<Context docBase="<%= @docbase %>" >
+
+  <Manager className="de.javakaffee.web.msm.MemcachedBackupSessionManager"
+           memcachedNodes="http://host1.yourdomain.com:8091/pools"
+           username="bucket1"
+           password="topsecret"
+           memcachedProtocol="binary"
+           sticky="false"
+           sessionBackupAsync="false"
+           requestUriIgnorePattern=".*\.(ico|png|gif|jpg|css|js)$"
+           transcoderFactoryClass="de.javakaffee.web.msm.serializer.kryo.KryoTranscoderFactory"
+      />
+
+</Context>

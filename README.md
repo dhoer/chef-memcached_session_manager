@@ -8,14 +8,14 @@
 [travis]: https://travis-ci.org/dhoer/chef-memcached_session_manager
 [github]: https://github.com/dhoer/chef-memcached_session_manager/issues
 
-This cookbook installs Tomcat high-availability clusters with memcached 
-(https://code.google.com/p/memcached-session-manager/).
+Installs/Configures Tomcat high-availability clusters with memcached using Martin Grotzke's 
+https://code.google.com/p/memcached-session-manager.
 
 ## Requirements
 
-- Java must be installed outside of this cookbook.
-- Tomcat must be installed outside of this cookbook.  This cookbook expects `$CATALINA_HOME` to be defined in
-the environment. If it is not, then override `node['memcached_session_manager']['tomcat']['lib']`.
+- This cookbook expects `$CATALINA_HOME` to be defined in the environment. If `$CATALINA_HOME` is not defined, then 
+please override `node['memcached_session_manager']['tomcat']['lib']` attribute.
+- Java & Tomcat must be installed outside of this cookbook.
 - Chef 11.14 or higher.
 
 ### Platforms
@@ -129,26 +129,26 @@ end
 
 
 #### Overview over memcached-session-manager configuration attributes
-Documentation below has been trimmed down from the original documenation.  The complete documentation can be found (here)[https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes]
+Documentation below has been trimmed down from the original.  Please read the complete documentation here:
+https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes
 
+- `className` - Defaults to `de.javakaffee.web.msm.MemcachedBackupSessionManager`. 
 - `memcachedNodes` (required) - This attribute must contain all memcached nodes you have running, or the membase 
 bucket uri(s). It should be the same for all tomcats.
-- `failoverNodes` (optional, must not be used for non-sticky sessions) - Specifies ids of the memcached nodes that 
-must only be used for session backup when none of the other memcached nodes are available. Several memcached node ids 
-are separated by space or comma.
-- `username` (optional) - Specifies the username used for a membase bucket or SASL. 
-- `password` (optional) - Specifies the password used for membase bucket or SASL authentication 
+- `failoverNodes` (optional, must not be used for non-sticky sessions) - Defaults to `nil`. Specifies ids of the 
+memcached nodes that must only be used for session backup when none of the other memcached nodes are available. 
+Several memcached node ids are separated by space or comma.
+- `username` - Defaults to `nil`. Specifies the username used for a membase bucket or SASL. 
+- `password` - Defaults to `nil`. Specifies the password used for membase bucket or SASL authentication 
 (can be left empty / omitted if the "default" membase bucket without a password shall be used).
-- `className` - Defaults to `de.javakaffee.web.msm.MemcachedBackupSessionManager`. 
-- `transcoderFactoryClass` - Defaults to `de.javakaffee.web.msm.JavaSerializationTranscoderFactory`.
 - `memcachedProtocol` - Defaults to `text` - Specifies the memcached protocol to use, one of `text` or 
 `binary`.
 - `sticky` - Defaults to `true`. Specifies if sticky or non-sticky sessions are used.
-- `lockingMode` (since 1.4.0, optional, for non-sticky sessions only, default none) - Specifies the locking strategy 
+- `lockingMode` (optional, for non-sticky sessions only) - Defaults to `none`. Specifies the locking strategy 
 for non-sticky sessions. Session locking is useful to prevent concurrent modifications and lost updates of the session 
 in the case of parallel requests. Session locking is done using memcached. Possible values for lockingMode are: 
 `none`, `all`, `auto`, and `uriPattern:<regexp>`.
-- `requestUriIgnorePattern` (optional) - Specifies a regular expression for request URIs, that shall not trigger a 
+- `requestUriIgnorePattern` - Defaults to `nil`. Specifies a regular expression for request URIs, that shall not trigger a 
 session backup. 
 - `sessionBackupAsync` - Defaults to `true`. Specifies if the session shall be stored asynchronously in memcached. 
 If this is true, the backupThreadCount setting is evaluated. If this is false, the timeout set via sessionBackupTimeout 
@@ -164,6 +164,7 @@ spymemcached ConnectionFactory.
 a prefix that's added to the session id when a session is stored in memcached. 
 - `sessionAttributeFilter` - Defaults to `nil`. A regular expression to control which session attributes are serialized 
 to memcached. 
+- `transcoderFactoryClass` - Defaults to `de.javakaffee.web.msm.JavaSerializationTranscoderFactory`.
 - `copyCollectionsForSerialization` - Defaults to `false`. A boolean value that specifies, if iterating over collection 
 elements shall be done on a copy of the collection or on the collection itself. 
 -  `customConverter` - Defaults to `nil`. Custom converter allow you to provide custom serialization of application 
