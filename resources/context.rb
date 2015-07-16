@@ -1,7 +1,7 @@
-actions :create
-default_action :create
+actions :install, :remove
+default_action :install
 
-attribute :dest, kind_of: String, name_attribute: true
+attribute :path, kind_of: String, name_attribute: true
 attribute :className, kind_of: String, default: 'de.javakaffee.web.msm.MemcachedBackupSessionManager'
 attribute :memcachedNodes, kind_of: String, required: true
 attribute :failoverNodes, kind_of: [String, NilClass], default: nil

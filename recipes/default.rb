@@ -1,3 +1,5 @@
+include_recipe 'maven::default'
+
 case node['platform_family']
 when 'rhel', 'debian'
   maven 'memcached-session-manager' do
@@ -59,5 +61,5 @@ when 'rhel', 'debian'
     fail("node['memcached_session_manager']['flavor'] = '#{flavor}' is not supported!")
   end
 else
-  Chef::Log.warn('memcached_session_manager cannot be installed on this platform using this cookbook')
+  log('memcached_session_manager cannot be installed on this platform using this cookbook')
 end

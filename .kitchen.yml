@@ -13,7 +13,11 @@ platforms:
 suites:
   - name: memcached_session_manager_test
     run_list:
-      - recipe[memcached_session_manager_test::context]
+      - recipe[java::default]
+      - recipe[tomcat::default]
+      - recipe[memcached_session_manager_test::context_install]
+      - recipe[memcached_session_manager_test::context_update]
+      - recipe[memcached_session_manager_test::context_remove]
     attributes:
       java:
         jdk_version: 7

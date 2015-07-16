@@ -132,6 +132,7 @@ end
 Documentation below has been trimmed down from the original.  Please read the complete documentation here:
 https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes
 
+- `path` (required) - Defaults to name of the resource block. Specifies direct path to context.xml file.
 - `className` - Defaults to `de.javakaffee.web.msm.MemcachedBackupSessionManager`. 
 - `memcachedNodes` (required) - This attribute must contain all memcached nodes you have running, or the membase 
 bucket uri(s). It should be the same for all tomcats.
@@ -148,8 +149,8 @@ Several memcached node ids are separated by space or comma.
 for non-sticky sessions. Session locking is useful to prevent concurrent modifications and lost updates of the session 
 in the case of parallel requests. Session locking is done using memcached. Possible values for lockingMode are: 
 `none`, `all`, `auto`, and `uriPattern:<regexp>`.
-- `requestUriIgnorePattern` - Defaults to `nil`. Specifies a regular expression for request URIs, that shall not trigger a 
-session backup. 
+- `requestUriIgnorePattern` - Defaults to `nil`. Specifies a regular expression for request URIs, that shall not 
+trigger a session backup. 
 - `sessionBackupAsync` - Defaults to `true`. Specifies if the session shall be stored asynchronously in memcached. 
 If this is true, the backupThreadCount setting is evaluated. If this is false, the timeout set via sessionBackupTimeout 
 is evaluated.
@@ -160,8 +161,8 @@ considered as being failed. This property is only evaluated if sessions are stor
 (set via sessionBackupAsync). 
 - `operationTimeout` - Defaults to `1000`. The memcached operation timeout used at various places, e.g. used for the 
 spymemcached ConnectionFactory.
-- `storageKeyPrefix` - Defaults to `nil` (webappVersion if storageKeyPrefix is not set explicitly). Allows to configure 
-a prefix that's added to the session id when a session is stored in memcached. 
+- `storageKeyPrefix` - Defaults to `webappVersion` Allows to configure a prefix that's added to the session id when a 
+session is stored in memcached. 
 - `sessionAttributeFilter` - Defaults to `nil`. A regular expression to control which session attributes are serialized 
 to memcached. 
 - `transcoderFactoryClass` - Defaults to `de.javakaffee.web.msm.JavaSerializationTranscoderFactory`.
@@ -178,7 +179,8 @@ runtime via JMX. Only allowed in sticky mode.
 ## Getting Help
 
 - Ask specific questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/chef).
-- Report bugs and discuss potential features in [Github issues](https://github.com/dhoer/chef-memcached_session_manager/issues).
+- Report bugs and discuss potential features in 
+[Github issues](https://github.com/dhoer/chef-memcached_session_manager/issues).
 
 ## Contributing
 
@@ -186,4 +188,5 @@ Please refer to [CONTRIBUTING](https://github.com/dhoer/chef-memcached_session_m
 
 ## License
 
-MIT - see the accompanying [LICENSE](https://github.com/dhoer/chef-memcached_session_manager/blob/master/LICENSE.md) file for details.
+MIT - see the accompanying [LICENSE](https://github.com/dhoer/chef-memcached_session_manager/blob/master/LICENSE.md) 
+file for details.
