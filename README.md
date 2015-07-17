@@ -128,10 +128,10 @@ end
 
 #### Actions
 
-- `install` - Adds or updates configuration for the memcached-session-manager from <Context> element in `context.xml` 
-file.
-- `remove` - Removes Manager configuration for the memcached-session-manager from <Context> element in `context.xml` 
-file.
+- `install` - Adds or updates the <Context> element in `context.xml` so that it contains the Manager configuration for 
+the memcached-session-manager.
+- `remove` - Removes the <Context> element in `context.xml` so that it contains the Manager configuration for 
+the memcached-session-manager.
 
 #### Attributes
 Documentation below has been trimmed down from the original.  Please read the complete documentation 
@@ -197,7 +197,7 @@ expect(chef_run).to install_memcached_session_manager_context('/path/to/context.
 )
 ```
 
-Selenium Cookbook Matchers
+Cookbook Matchers
 
 - install_memcached_session_manager_context(path)
 - remove_memcached_session_manager_context(path)
