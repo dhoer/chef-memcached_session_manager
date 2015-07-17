@@ -54,14 +54,13 @@ The version of `netty` to install for `couchbase`.
 ## LWRPs
 
 ### memcached_session_manager_context
-Updates the <Context> element in context.xml so that it contains the Manager configuration for the 
+Updates the <Context> element in `context.xml` so that it contains the Manager configuration for the 
 memcached-session-manager, like in the examples below. 
 
 The following examples show configurations for sticky sessions and non-sticky sessions with memcached servers and 
 for non-sticky sessions with membase. The examples with memcached servers assume that there are two memcacheds 
 running, one on host1 and another one on host2. All sample configurations assume that you want to use kryo based 
 serialization.
-
 
 #### Example for sticky sessions + kryo
 The following example shows the configuration of the first tomcat, assuming that it runs on host1, together with
@@ -127,10 +126,16 @@ memcached_session_manager_context '/path/to/context.xml' do
 end
 ```
 
+#### Actions
 
-#### Overview over memcached-session-manager configuration attributes
-Documentation below has been trimmed down from the original.  Please read the complete documentation here:
-https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes
+- `install` - Adds or updates configuration for the memcached-session-manager from <Context> element in `context.xml` 
+file.
+- `remove` - Removes Manager configuration for the memcached-session-manager from <Context> element in `context.xml` 
+file.
+
+#### Attributes
+Documentation below has been trimmed down from the original.  Please read the complete documentation 
+[here](https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes)
 
 - `path` (required) - Defaults to name of the resource block. Specifies direct path to context.xml file.
 - `className` - Defaults to `de.javakaffee.web.msm.MemcachedBackupSessionManager`. 
@@ -174,6 +179,28 @@ the comma). Converter classes must be available in the classpath of the web appl
 - `enableStatistics` - Defaults to `true`. A boolean value that specifies, if statistics shall be gathered. 
 - `enabled` - Defaults to `true`. Specifies if session storage in memcached is enabled or not, can also be changed at 
 runtime via JMX. Only allowed in sticky mode.
+
+
+## ChefSpec Matchers
+
+This cookbook includes custom [ChefSpec](https://github.com/sethvargo/chefspec) matchers you can use to test 
+your own cookbooks.
+
+Example Matcher Usage
+
+```ruby
+expect(chef_run).to install_memcached_session_manager_context('/path/to/context.xml').with(
+  memcachedNodes: 'n1:host1.yourdomain.com:11211,n2:host2.yourdomain.com:11211',
+  failoverNodes: 'n1',
+  storageKeyPrefix: 'context',
+  requestUriIgnorePattern: '.*\.(ico|png|gif|jpg|css|js)$'
+)
+```
+
+Selenium Cookbook Matchers
+
+- install_memcached_session_manager_context(path)
+- remove_memcached_session_manager_context(path)
 
 
 ## Getting Help
