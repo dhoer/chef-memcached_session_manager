@@ -12,23 +12,23 @@ describe 'memcached_session_manager_test::context_install' do
 
   it 'copies context manager none' do
     expect(chef_run).to create_cookbook_file('/var/chef/cache/context_manager_install.xml').with(
-        source: 'context_manager_none.xml'
-      )
+      source: 'context_manager_none.xml'
+    )
   end
 
   it 'install manager context' do
     expect(chef_run).to install_memcached_session_manager_context('/var/chef/cache/context_manager_install.xml').with(
-        memcachedNodes: 'http://host1.yourdomain.com:8091/pools',
-        failoverNodes: 'n1',
-        requestUriIgnorePattern: '.*\.(ico|png|gif|jpg|css|js)$'
-      )
+      memcachedNodes: 'http://host1.yourdomain.com:8091/pools',
+      failoverNodes: 'n1',
+      requestUriIgnorePattern: '.*\.(ico|png|gif|jpg|css|js)$'
+    )
   end
 
   it 'creates context manager template' do
     expect(chef_run).to create_template('/var/chef/cache/context_manager.xml').with(
-        source: 'context_manager.xml.erb',
-        cookbook: 'memcached_session_manager'
-      )
+      source: 'context_manager.xml.erb',
+      cookbook: 'memcached_session_manager'
+    )
   end
 
   it 'install manager element to context xml' do
@@ -48,23 +48,23 @@ describe 'memcached_session_manager_test::context_update' do
 
   it 'copies context manager exists' do
     expect(chef_run).to create_cookbook_file('/var/chef/cache/context_manager_update.xml').with(
-        source: 'context_manager_exists.xml'
-      )
+      source: 'context_manager_exists.xml'
+    )
   end
 
   it 'install manager context' do
     expect(chef_run).to install_memcached_session_manager_context('/var/chef/cache/context_manager_update.xml').with(
-        memcachedNodes: 'http://host1.yourdomain.com:8091/pools',
-    failoverNodes: 'n1',
-    requestUriIgnorePattern: '.*\.(ico|png|gif|jpg|css|js)$'
-      )
+      memcachedNodes: 'http://host1.yourdomain.com:8091/pools',
+      failoverNodes: 'n1',
+      requestUriIgnorePattern: '.*\.(ico|png|gif|jpg|css|js)$'
+    )
   end
 
   it 'creates context manager template' do
     expect(chef_run).to create_template('/var/chef/cache/context_manager.xml').with(
-        source: 'context_manager.xml.erb',
-        cookbook: 'memcached_session_manager'
-      )
+      source: 'context_manager.xml.erb',
+      cookbook: 'memcached_session_manager'
+    )
   end
 
   it 'install manager element to context xml' do
@@ -84,8 +84,8 @@ describe 'memcached_session_manager_test::context_remove' do
 
   it 'copies context manager exists' do
     expect(chef_run).to create_cookbook_file('/var/chef/cache/context_manager_remove.xml').with(
-        source: 'context_manager_exists.xml'
-      )
+      source: 'context_manager_exists.xml'
+    )
   end
 
   it 'removes manager context' do
