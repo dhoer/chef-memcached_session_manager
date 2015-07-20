@@ -26,7 +26,9 @@ please override `node['memcached_session_manager']['tomcat']['lib']` attribute.
 
 ## Usage
 
-Include the default recipe on a node's runlist to ensure that memcached_session_manager is installed on tomcat.
+The `default` recipe adds required memcached_session_manager jars to Tomcat.  Use the attributes below to configure
+memcached_session_manager.  Note `memcached_session_manager_context` resource will automatically include the default 
+recipe. 
 
 ### Attributes
 - `node['memcached_session_manager']['version']` - The version of memcached_session_manager to install. 
@@ -51,7 +53,7 @@ The version of `httpcore-nio` to install for `couchbase`.
 The version of `netty` to install for `couchbase`.
 
 
-## LWRPs
+## LWRP
 
 ### memcached_session_manager_context
 Updates the <Context> element in `context.xml` so that it contains the Manager configuration for the 
@@ -62,7 +64,7 @@ for non-sticky sessions with membase. The examples with memcached servers assume
 running, one on host1 and another one on host2. All sample configurations assume that you want to use kryo based 
 serialization.
 
-#### Example for sticky sessions + kryo
+##### Example for sticky sessions + kryo
 The following example shows the configuration of the first tomcat, assuming that it runs on host1, together with
 memcached "n1". The attribute failoverNodes="n1" tells msm to store sessions preferably in memcached "n2" and only 
 store sessions in "n1" (running on the same host/machine) if no other memcached node (here only n2) is available 
@@ -79,7 +81,7 @@ end
 ```
 
 
-#### Example for non-sticky sessions + kryo
+##### Example for non-sticky sessions + kryo
 The following example shows a configuration for non-sticky sessions. In this case there's no need for failoverNodes, 
 as sessions are served by all tomcats round-robin and they're not bound to a single tomcat. For non-sticky sessions 
 the configuration (for both/all tomcats) would look like this:
@@ -95,7 +97,7 @@ end
 ```
 
 
-#### Example for non-sticky sessions with couchbase + kryo
+##### Example for non-sticky sessions with couchbase + kryo
 To connect to a membase bucket `bucket1` the configuration would look like this:
 
 ```ruby
@@ -111,7 +113,7 @@ end
 ```
 
 
-#### Example for multiple contexts sharing the same session id
+##### Example for multiple contexts sharing the same session id
 If you are running multiple webapps/contexts sharing the same session id (e.g. by having set sessionCookiePath="/") 
 you must tell memcached session manager to add a prefix to the session id when storing a session in memcached. 
 For this you can use the storageKeyPrefix attribute as shown by this example (see also the more detailed attribute 
@@ -135,7 +137,7 @@ the memcached-session-manager.
 
 #### Attributes
 Documentation below has been trimmed down from the original.  Please read the complete documentation 
-[here](https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes)
+[here](https://code.google.com/p/memcached-session-manager/wiki/SetupAndConfiguration#Overview_over_memcached-session-manager_configuration_attributes).
 
 - `path` (required) - Defaults to name of the resource block. Specifies direct path to context.xml file.
 - `className` - Defaults to `de.javakaffee.web.msm.MemcachedBackupSessionManager`. 
